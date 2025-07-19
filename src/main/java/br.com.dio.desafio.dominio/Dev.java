@@ -1,6 +1,7 @@
 package br.com.dio.desafio.dominio;
 
 import java.util.LinkedHashSet;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 
@@ -10,15 +11,20 @@ public class Dev {
     private Set<Content> finishedContents = new LinkedHashSet<>();
 
     public void subscribBootcamp(Bootcamp bootcamp){
-
+        this.subscribedContent.addAll(bootcamp.getContents());
+        bootcamp.getSubscribedDevs().add(this);
     }
 
     public void toProgress(){
-
+        var content = this.subscribedContent.stream().findFirst();
+        this.finishedContents.add(content.orElseThrow(() -> new NoSuchElementException("Você não possui curso para progredir")));
+        this.subscribedContent.remove(content.get());
     }
 
-    public void calculateXp(){
-
+    public double calculateXp(){
+        return this.finishedContents.stream()
+                .mapToDouble(Content::calculateXP)
+                .sum();
     }
 
     public String getNome() {
