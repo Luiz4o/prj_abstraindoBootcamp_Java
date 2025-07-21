@@ -4,6 +4,14 @@ public class Course extends Content {
 
     private int workload;
 
+    public Course() {
+    }
+
+    public Course(String title, String description, int workload) {
+        super(title,description);
+        this.workload = workload;
+    }
+
     @Override
     public double calculateXP() {
         return XP_DEFAULT * workload;
@@ -19,10 +27,8 @@ public class Course extends Content {
 
     @Override
     public String toString() {
-        return "Curso{" +
-                "title='" + getTitle() + '\'' +
-                ", description='" + getDescription() + '\'' +
-                ", workload='" + workload + '\'' +
-                '}';
+        return "Titulo = " + getTitle() + '\n' +
+                "Descricao = " + getDescription() + '\n' +
+                "Carga Horaria = " + workload + '\n';
     }
 }

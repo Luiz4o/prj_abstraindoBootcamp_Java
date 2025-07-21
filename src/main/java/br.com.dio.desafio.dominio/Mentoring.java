@@ -1,10 +1,21 @@
 package br.com.dio.desafio.dominio;
 
+import javax.swing.text.DateFormatter;
+import java.text.Format;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Mentoring extends Content {
 
     private OffsetDateTime date;
+
+    public Mentoring(String title, String description, OffsetDateTime date) {
+        super(title, description);
+        this.date = date;
+    }
+
+    public Mentoring() {
+    }
 
     @Override
     public double calculateXP() {
@@ -21,10 +32,10 @@ public class Mentoring extends Content {
 
     @Override
     public String toString() {
-        return "Mentoria{" +
-                ", title=" + getTitle() +
-                ", desciption=" + getDescription() +
-                ", date=" + date +
-                '}';
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ssXXX");
+
+        return "Titulo : " + getTitle() + '\n' +
+                "Descricao : " + getDescription() + '\n' +
+                "Data :" + date.format(formatter) + '\n';
     }
 }

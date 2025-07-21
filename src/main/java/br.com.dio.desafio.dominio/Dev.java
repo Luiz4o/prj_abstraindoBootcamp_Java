@@ -6,13 +6,20 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Dev {
-    private String nome;
+    private String name;
     private Set<Content> subscribedContent = new LinkedHashSet<>();
     private Set<Content> finishedContents = new LinkedHashSet<>();
 
-    public void subscribBootcamp(Bootcamp bootcamp){
+    public Dev() {
+    }
+
+    public Dev(String name) {
+        this.name = name;
+    }
+
+    public void subscribeBootcamp(Bootcamp bootcamp){
         this.subscribedContent.addAll(bootcamp.getContents());
-        bootcamp.getSubscribedDevs().add(this);
+        bootcamp.subscribeDev(this);
     }
 
     public void toProgress(){
@@ -27,12 +34,12 @@ public class Dev {
                 .sum();
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<Content> getSubscribedContent() {
@@ -55,11 +62,18 @@ public class Dev {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Dev dev)) return false;
-        return Objects.equals(getNome(), dev.getNome()) && Objects.equals(getSubscribedContent(), dev.getSubscribedContent()) && Objects.equals(getFinishedContents(), dev.getFinishedContents());
+        return Objects.equals(getName(), dev.getName()) && Objects.equals(getSubscribedContent(), dev.getSubscribedContent()) && Objects.equals(getFinishedContents(), dev.getFinishedContents());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getNome(), getSubscribedContent(), getFinishedContents());
+        return Objects.hash(getName(), getSubscribedContent(), getFinishedContents());
+    }
+
+    @Override
+    public String toString() {
+        return  "Nome = " + name + '\n' +
+                "Conteudos inscritos = " + subscribedContent + '\n' +
+                "Conteudos finalizados =" + finishedContents + '\n';
     }
 }

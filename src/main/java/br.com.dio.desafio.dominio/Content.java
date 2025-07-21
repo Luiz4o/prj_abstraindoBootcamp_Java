@@ -6,6 +6,14 @@ public abstract class Content {
     private String title;
     private String description;
 
+    public Content(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
+    public Content() {
+    }
+
     public abstract  double  calculateXP();
 
     public String getTitle() {
@@ -24,5 +32,9 @@ public abstract class Content {
         this.description = description;
     }
 
-
+    @Override
+    public String toString() {
+        return  "Titulo = " + title + '\n' +
+                "Descricao = " + description + '\n';
+    }
 }
